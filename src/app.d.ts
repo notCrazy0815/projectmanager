@@ -7,6 +7,17 @@ declare global {
 		// interface PageData {}
 		// interface Platform {}
 	}
+
+	declare class Project {
+		name: string;
+		description: string;
+		tasks: Task[];
+	}
+
+	declare class Task {
+		name: string;
+		status: string;
+	}
 }
 
 export {};
