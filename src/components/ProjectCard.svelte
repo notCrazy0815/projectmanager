@@ -3,18 +3,28 @@
 </script>
 
 <div class="project-card">
-    <div class="project-card__header">
-        <h3 class="project-card__title">{project.name}</h3>
-        <p class="project-card__description">{project.description}</p>
-    </div>
-    <div class="project-card__body">
-        <div class="project-card__tasks">
-            {#each project.tasks as task}
-                <div class="project-card-task">
-                    <span class="project-card__task-name">{task.name}</span>
-                    <span class="project-card__task-status">{task.status}</span>
-                </div>
-            {/each}
-        </div>
+    <div class="project-card-header">
+        <h3 class="project-card-title">{project.name}</h3>
+        <p class="project-card-description">{project.description}</p>
     </div>
 </div>
+
+<style lang="scss">
+    @import 'src/assets/scss/variables.scss';
+    @import 'src/assets/scss/base.scss';
+
+    .project-card {
+        display: flex;
+        flex-direction: column;
+        gap: $gap-medium;
+
+        cursor: pointer;
+        
+        padding: $padding-medium;
+
+        background-color: $background-primary;
+        border-radius: $border-radius-medium;
+
+        box-shadow: $box-shadow-medium;
+    }
+</style>
