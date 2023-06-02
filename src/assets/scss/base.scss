@@ -13,19 +13,19 @@
 
 h1 {
   font-size: $font-size-extreme;
-  line-height: 1.1;
+  line-height: 1;
   color: $font-primary;
 }
 
 h2 {
   font-size: $font-size-large;
-  line-height: 1.2;
+  line-height: 1;
   color: $font-primary;
 }
 
 h3 {
   font-size: $font-size-medium;
-  line-height: 1.3;
+  line-height: 1;
   color: $font-primary;
 }
 
@@ -44,7 +44,7 @@ a {
   padding: $padding-medium $padding-large;
   border-radius: $border-radius-medium;
   background-color: $secondary;
-  color: $font-primary;
+  color: $font-primary-dark;
   cursor: pointer;
   transition: all $transition-duration ease-in-out;
   box-shadow: $box-shadow-extreme;
@@ -56,7 +56,6 @@ a {
 
 .button-primary {
   background-color: $primary;
-  color: $font-primary;
 
   &:hover {
     background-color: darken($primary, 10%);

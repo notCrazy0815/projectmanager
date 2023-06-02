@@ -28,23 +28,30 @@ $grey-5: #a4b0be;
 $grey-6: #747d8c;
 $grey-7: #57606f;
 $grey-8: #2f3542;
+$grey-9: #202327;
+$grey-10: #121212;
 $black: #000000;
 
 $primary: $blue;
+$primary-dark: $blue-dark;
 $secondary: $grey-5;
+$secondary-dark: $grey-6;
 $success: $green;
 $warning: $yellow;
 $error: $red;
 
-$font-primary: $black;
-$font-secondary: $grey-8;
-$font-tertiary: $grey-7;
-
 $font-family: 'Geologica', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
 
-$background-primary: $white;
-$background-secondary: $grey-1;
-$background-tertiary: $grey-2;
+$font-primary: $grey-1;
+$font-secondary: $grey-2;
+$font-tertiary: $grey-3;
+$font-primary-dark: black;
+$font-secondary-dark: $grey-9;
+$font-tertiary-dark: $grey-8;
+
+$background-primary: $grey-9;
+$background-secondary: $grey-10;
+$background-tertiary: $grey-8;
 
 $border-primary: $grey-2;
 $border-secondary: $grey-3;
@@ -65,6 +72,11 @@ $padding-large: 1rem;
 $padding-medium: 0.5rem;
 $padding-small: 0.25rem;
 
+$margin-extreme: 2rem;
+$margin-large: 1rem;
+$margin-medium: 0.5rem;
+$margin-small: 0.25rem;
+
 $gap-extreme: 2rem;
 $gap-large: 1rem;
 $gap-medium: 0.5rem;
@@ -78,3 +90,8 @@ $box-shadow-extreme: 0.1rem 0.1rem 1rem rgba(0, 0, 0, 0.3);
 $box-shadow-large: 0.1rem 0.1rem 0.9rem rgba(0, 0, 0, 0.2);
 $box-shadow-medium: 0.1rem 0.1rem 0.8rem rgba(0, 0, 0, 0.1);
 $box-shadow-small: 0.1rem 0.1rem 0.7rem rgba(0, 0, 0, 0.1);
+
+$breakpoint-extreme: 2000px;
+$breakpoint-large: 1200px;
+$breakpoint-desktop: 900px;
+$breakpoint-mobile: 600px;

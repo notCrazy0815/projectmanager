@@ -3,7 +3,7 @@
         <a href="/">
             <h3>ProjectManager</h3></a>
         <div class="links">
-            <a href="dashboard">Dashboard</a>
+            <a href="/dashboard">Dashboard</a>
         </div>
     </nav>
     <div class="content">

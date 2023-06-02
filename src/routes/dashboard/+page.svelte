@@ -3,142 +3,15 @@
 </svelte:head>
 
 <script lang="ts">
-	import ProjectCard from "../../components/ProjectCard.svelte";
+	import ProjectCard from "../../components/ProjectCard.svelte"
+    import { onMount } from "svelte"
 
-    let projects: Project[] = [
-        {
-            name: "Infoprojekt",
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-            tasks: [
-                {
-                    name: "Task 1",
-                    status: "done"
-                },
-                {
-                    name: "Task 2",
-                    status: "in progress"
-                },
-                {
-                    name: "Task 3",
-                    status: "in progress"
-                },
-                {
-                    name: "Task 4",
-                    status: "undone"
-                }
-            ]
-        },
-        {
-            name: "GRW Präsentation",
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-            tasks: [
-                {
-                    name: "Task 1",
-                    status: "done"
-                },
-                {
-                    name: "Task 2",
-                    status: "in progress"
-                },
-                {
-                    name: "Task 3",
-                    status: "in progress"
-                },
-                {
-                    name: "Task 4",
-                    status: "undone"
-                }
-            ]
-        },
-        {
-            name: "Svelte Crash Course",
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-            tasks: [
-                {
-                    name: "Task 1",
-                    status: "done"
-                },
-                {
-                    name: "Task 2",
-                    status: "in progress"
-                },
-                {
-                    name: "Task 3",
-                    status: "in progress"
-                },
-                {
-                    name: "Task 4",
-                    status: "undone"
-                }
-            ]
-        },
-        {
-            name: "Haushalt",
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-            tasks: [
-                {
-                    name: "Task 1",
-                    status: "done"
-                },
-                {
-                    name: "Task 2",
-                    status: "in progress"
-                },
-                {
-                    name: "Task 3",
-                    status: "in progress"
-                },
-                {
-                    name: "Task 4",
-                    status: "undone"
-                }
-            ]
-        },
-        {
-            name: "Geographie Recherche",
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-            tasks: [
-                {
-                    name: "Task 1",
-                    status: "done"
-                },
-                {
-                    name: "Task 2",
-                    status: "in progress"
-                },
-                {
-                    name: "Task 3",
-                    status: "in progress"
-                },
-                {
-                    name: "Task 4",
-                    status: "undone"
-                }
-            ]
-        },
-        {
-            name: "Deutsch Aufsatz",
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-            tasks: [
-                {
-                    name: "Task 1",
-                    status: "done"
-                },
-                {
-                    name: "Task 2",
-                    status: "in progress"
-                },
-                {
-                    name: "Task 3",
-                    status: "in progress"
-                },
-                {
-                    name: "Task 4",
-                    status: "undone"
-                }
-            ]
-        }
-    ];
+    let projects: Project[] = []
+
+    onMount(async () => {
+        const res = await fetch("/api/projects")
+        projects = await res.json()
+    });
 </script>
 
 <div class="content-header">
@@ -163,6 +36,12 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
             gap: $gap-medium;
+        }
+
+        @media screen and (max-width: $breakpoint-mobile) {
+            .project-overview {
+                grid-template-columns: 1fr;
+            }
         }
     }
 </style>
