@@ -9,8 +9,6 @@
 
 <style lang="scss">
     @import "src/assets/scss/variables";
-    @import "src/assets/scss/base";
-
     .task-card {
         display: flex;
         justify-content: space-between;

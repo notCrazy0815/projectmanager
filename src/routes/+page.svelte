@@ -5,7 +5,9 @@
 <div class="start-page-wrapper">
     <div class="start-page-content">
         <div class="start-page-title">
-            <h2>Make project managment easier with ProjectManager</h2>
+            <h1>Make project managment
+                <span>easier</span>
+            </h1>
         </div>
         <div class="start-page-links">
             <a href="dashboard" class="button button-primary">Start</a>
@@ -16,7 +18,6 @@
 
 <style lang="scss">
     @import 'src/assets/scss/variables';
-    @import 'src/assets/scss/base';
 
     .start-page-wrapper {
         width: 100%;
@@ -34,8 +35,15 @@
             justify-content: center;
 
             .start-page-title {
-                h2 {
+                h1 {
                     text-align: center;
+
+                    span {
+                        background: linear-gradient(to right, $success, $warning, $error);
+                        background-clip: text;
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                    }
                 }
             }
 

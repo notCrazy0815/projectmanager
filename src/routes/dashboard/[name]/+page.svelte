@@ -3,7 +3,8 @@
 </svelte:head>
 
 <script lang="ts">
-	import TaskCard from "../../../components/TaskCard.svelte"
+	import ProjectOverview from "../../../components/ProjectOverview.svelte";
+    import TaskCard from "../../../components/TaskCard.svelte"
     import { onMount } from "svelte"
 
     export let data: { name: string }
@@ -33,25 +34,20 @@
 {#if tasks.length === 0}
     <p>No tasks</p>
 {/if}
-<div class="project-overview">
-    {#await project}
-        <div></div>
-    {:then project}
-        <div class="undone-tasks">
-            <div 
-                class="in-progress-tasks" 
-                style="width: {tasks.filter((task) => task.status === "undone" || task.status === "in_progress").length / tasks.length * 100}%"
-            >
-                <div 
-                    class="done-tasks"
-                    style="width: {tasks.filter((task) => task.status === "done").length / tasks.length * 100}%"
-                ></div>
-            </div>
-        </div>
-    {:catch error}
-        <div></div>
-    {/await}
-</div>
+{#await project}
+    <div></div>
+{:then project}
+    <div class="project-overview-container">
+        <ProjectOverview 
+            done={tasks.filter((task) => task.status === "done").length}
+            inProgress={tasks.filter((task) => task.status === "in_progress").length}
+            undone={tasks.filter((task) => task.status === "undone").length}
+            total={tasks.length}
+        />
+    </div>
+{:catch error}
+    <div></div>
+{/await}
 <div class="task-wrapper">
     {#await project}
         <p>Loading tasks</p>
@@ -66,7 +62,11 @@
 
 <style lang="scss">
     @import "src/assets/scss/variables";
-    @import "src/assets/scss/base";
+
+    .project-overview-container {
+        height: $font-size-medium;
+        margin-bottom: $gap-medium;
+    }
 
     .project-header {
         display: flex;
@@ -75,43 +75,6 @@
 
         h2 {
             margin-bottom: 0;
-        }
-    }
-
-    .project-overview {
-        width: 100%;
-        height: $font-size-medium;
-
-        border-radius: $border-radius-large;
-
-        background-color: $background-primary;
-        margin-bottom: $margin-large;
-
-        .undone-tasks {
-            width: 100%;
-            height: 100%;
-
-            border-radius: $border-radius-large;
-
-            background-color: $error;
-
-            .in-progress-tasks {
-                width: 0%;
-                height: 100%;
-
-                border-radius: $border-radius-large;
-
-                background-color: $warning;
-
-                .done-tasks {
-                    width: 0%;
-                    height: 100%;
-
-                    border-radius: $border-radius-large;
-
-                    background-color: $success;
-                }
-            }
         }
     }
 

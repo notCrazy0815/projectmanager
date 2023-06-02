@@ -29,13 +29,12 @@
 
 <style lang="scss">
     @import 'src/assets/scss/variables';
-    @import 'src/assets/scss/base';
 
     .content-body {
         .project-overview {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-            gap: $gap-medium;
+            gap: $gap-large;
         }
 
         @media screen and (max-width: $breakpoint-mobile) {
