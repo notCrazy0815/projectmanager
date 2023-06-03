@@ -3,7 +3,8 @@
 </svelte:head>
 
 <script lang="ts">
-	import ProjectOverview from "../../../components/ProjectOverview.svelte";
+	import AddTaskButton from "../../../components/AddTaskButton.svelte";
+import ProjectOverview from "../../../components/ProjectOverview.svelte";
     import TaskCard from "../../../components/TaskCard.svelte"
     import { onMount } from "svelte"
 
@@ -28,7 +29,10 @@
 </script>
 
 <div class="project-header">
-    <h2>{ data.name }</h2>
+    <div class="project-header-title">
+        <h2>{ data.name }</h2>
+        <AddTaskButton />
+    </div>
     <p>{ description }</p>
 </div>
 {#if tasks.length === 0}
@@ -73,8 +77,16 @@
         flex-direction: column;
         gap: 0;
 
-        h2 {
-            margin-bottom: 0;
+        .project-header-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: $gap-small;
+
+            h2 {
+                margin-bottom: 0;
+                margin-top: $margin-large;
+            }
         }
     }
 

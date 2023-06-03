@@ -3,14 +3,14 @@
         <a href="/">
             <h3>ProjectManager</h3></a>
         <div class="links">
-            <a href="/dashboard">Dashboard</a>
+            <a href="/dashboard" class="small-text">Dashboard</a>
         </div>
     </nav>
     <div class="content">
         <slot></slot>
     </div>
     <footer class="footer">
-        <p class="small-text">© 2023 <a class="small-text" href="https://github.com/notCrazy0815">notCrazy0815</a></p>
+        <p class="tiny-text">© 2023 <a class="tiny-text" href="https://github.com/notCrazy0815">notCrazy0815</a></p>
     </footer>
 </div>
 
@@ -64,15 +64,22 @@
         color: $font-tertiary;
     }
 
+    :global(.tiny-text) {
+        font-size: $font-size-tiny;
+        line-height: 1;
+        color: $font-tertiary;
+    }
+
     :global(.button) {
-        padding: $padding-medium $padding-large;
-        border-radius: $border-radius-medium;
+        padding: $padding-small $padding-extreme;
+        border-radius: $border-radius-small;
         background-color: $secondary;
         color: $font-primary-dark;
         cursor: pointer;
         transition: all $transition-duration ease-in-out;
         box-shadow: $box-shadow-extreme;
         font-size: $font-size-medium;
+        border: none;
 
         &:hover {
             background-color: darken($secondary, 10%);
@@ -132,9 +139,21 @@
         }
     }
 
+    @media screen and (max-width: $breakpoint-large) {
+        :global(html) {
+            font-size: 80% !important;
+        }
+    }
+
+    @media screen and (max-width: $breakpoint-desktop) {
+        :global(html) {
+            font-size: 70% !important;
+        }
+    }
+
     @media screen and (max-width: $breakpoint-mobile) {
         :global(html) {
-            font-size: 65% !important;
+            font-size: 60% !important;
         }
     }
 </style>

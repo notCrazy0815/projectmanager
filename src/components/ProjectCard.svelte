@@ -23,6 +23,9 @@
     @import 'src/assets/scss/variables.scss';
 
     .project-card {
+        width: 100%;
+        height: 100%;
+
         display: flex;
         flex-direction: column;
         gap: $gap-medium;

@@ -3,7 +3,8 @@
 </svelte:head>
 
 <script lang="ts">
-	import ProjectCard from "../../components/ProjectCard.svelte"
+	import NewButton from "../../components/NewButton.svelte";
+import ProjectCard from "../../components/ProjectCard.svelte"
     import { onMount } from "svelte"
 
     let projects: Project[] = []
@@ -16,6 +17,9 @@
 
 <div class="content-header">
     <h2>Dashboard</h2>
+    <div class="content-actions">
+        <NewButton />
+    </div>
 </div>
 <div class="content-body">
     <div class="project-overview">
@@ -30,10 +34,17 @@
 <style lang="scss">
     @import 'src/assets/scss/variables';
 
+    .content-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     .content-body {
         .project-overview {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            grid-auto-rows: 1fr;
             gap: $gap-large;
         }
 
