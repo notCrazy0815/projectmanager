@@ -101,6 +101,20 @@ const projects: Project[] = [
         name: "Mathe Hausaufgaben",
         description: "Hausaufgaben für Mathe, Abgabe am Montag.",
         tasks: [],
+    },
+    {
+        name: "Englisch Vokabeln",
+        description: "Vokabeln für Englisch lernen.",
+        tasks: [
+            {
+                name: "Vokabeln lernen",
+                status: "done"
+            },
+            {
+                name: "Vokabeln abfragen",
+                status: "in_progress"
+            },
+        ],
     }
 ];
 

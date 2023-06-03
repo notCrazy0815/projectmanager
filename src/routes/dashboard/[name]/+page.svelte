@@ -54,7 +54,7 @@ import ProjectOverview from "../../../components/ProjectOverview.svelte";
         <p>Loading tasks</p>
     {:then project}
         {#if tasks.length === 0}
-            <p class="no-task-text">No tasks yet, create on by clicking on the "Add" button above</p>
+            <p class="no-task-text">No tasks yet, create one by clicking on the "Add" button above</p>
         {:else}
             {#each tasks as task}
                 <TaskCard task={task} />
