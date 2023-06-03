@@ -2,16 +2,15 @@ import { comparePasswords, createToken } from "$lib/auth"
 import db from "$lib/prisma"
 import { redirect } from "@sveltejs/kit";
 import type { Actions } from "./$types"
+import { setUserCookies, userCookiesExist } from "$lib/cookies";
 
-export const load = async(event) => {
-    if (event.cookies.get("token") && event.cookies.get("username") && event.cookies.get("userId")) {
-        throw redirect(303, "/dashboard")
-    }
+export const load = async({ cookies }) => {
+    if (userCookiesExist(cookies)) throw redirect(303, "/dashboard")
 }
 
 export const actions = {
-    login: async(event) => {
-        const data = await event.request.formData()
+    login: async({ request, cookies }) => {
+        const data = await request.formData()
         const username = data.get("username") as string
         const password = data.get("password") as string
 
@@ -31,23 +30,7 @@ export const actions = {
                 if (await comparePasswords(password, user.password)) {
                     const token = createToken(user)
 
-                    event.cookies.set("token", token, {
-                        httpOnly: true,
-                        path: "/",
-                        maxAge: 60 * 60 * 24,
-                    })
-
-                    event.cookies.set("username", user.name, {
-                        httpOnly: false,
-                        path: "/",
-                        maxAge: 60 * 60 * 24,
-                    })
-
-                    event.cookies.set("userId", user.id, {
-                        httpOnly: false,
-                        path: "/",
-                        maxAge: 60 * 60 * 24,
-                    })
+                    setUserCookies(cookies, token, user.name, user.id)
 
                     return {
                         success: true,

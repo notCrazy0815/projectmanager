@@ -1,9 +1,15 @@
 import { createToken, hashPassword } from '$lib/auth.js'
+import { setUserCookies, userCookiesExist } from '$lib/cookies'
 import db from '$lib/prisma.js'
+import { redirect, type Actions } from '@sveltejs/kit'
+
+export const load = async({ cookies }) => {
+    if (userCookiesExist(cookies)) throw redirect(303, "/dashboard")
+}
 
 export const actions = {
-    register: async(event) => {
-        const data = await event.request.formData()
+    register: async({ request, cookies }) => {
+        const data = await request.formData()
         const username = data.get("username") as string
         const password = data.get("password") as string
 
@@ -19,21 +25,21 @@ export const actions = {
                 }
             })
 
-            const token = createToken(user);
+            const token = createToken(user)
+
+            setUserCookies(cookies, token, user.name, user.id)
 
             return {
                 success: true,
-                token,
-                user: {
-                    id: user.id,
-                    name: user.name,
-                }
+                error: false,
+                message: "User created",
             }
         } catch (e) {
             return {
                 success: false,
-                error: e
+                error: true,
+                message: "User already exists"
             }
         }
     }
-}
+} satisfies Actions
