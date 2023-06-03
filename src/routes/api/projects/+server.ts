@@ -96,6 +96,11 @@ const projects: Project[] = [
                 status: "in_progress"
             }
         ]
+    },
+    {
+        name: "Mathe Hausaufgaben",
+        description: "Hausaufgaben für Mathe, Abgabe am Montag.",
+        tasks: [],
     }
 ];
 

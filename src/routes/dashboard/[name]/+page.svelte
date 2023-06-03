@@ -35,9 +35,6 @@ import ProjectOverview from "../../../components/ProjectOverview.svelte";
     </div>
     <p>{ description }</p>
 </div>
-{#if tasks.length === 0}
-    <p>No tasks</p>
-{/if}
 {#await project}
     <div></div>
 {:then project}
@@ -56,9 +53,13 @@ import ProjectOverview from "../../../components/ProjectOverview.svelte";
     {#await project}
         <p>Loading tasks</p>
     {:then project}
-        {#each tasks as task}
-            <TaskCard task={task} />
-        {/each}
+        {#if tasks.length === 0}
+            <p class="no-task-text">No tasks yet, create on by clicking on the "Add" button above</p>
+        {:else}
+            {#each tasks as task}
+                <TaskCard task={task} />
+            {/each}
+        {/if}
     {:catch error}
         <p>Something went wrong</p>
     {/await}
@@ -88,6 +89,11 @@ import ProjectOverview from "../../../components/ProjectOverview.svelte";
                 margin-top: $margin-large;
             }
         }
+    }
+
+    .no-task-text {
+        text-align: center;
+        margin-top: $margin-large;
     }
 
     .task-wrapper {

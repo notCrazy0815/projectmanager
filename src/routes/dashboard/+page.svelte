@@ -22,6 +22,9 @@ import ProjectCard from "../../components/ProjectCard.svelte"
     </div>
 </div>
 <div class="content-body">
+    {#if projects.length === 0}
+        <p>No projects yet. Create one by clicking the button above.</p>
+    {:else}
     <div class="project-overview">
         {#each projects as project}
             <a href="dashboard/{project.name}">
@@ -29,6 +32,7 @@ import ProjectCard from "../../components/ProjectCard.svelte"
             </a>
         {/each}
     </div>
+    {/if}
 </div>
 
 <style lang="scss">
@@ -41,6 +45,11 @@ import ProjectCard from "../../components/ProjectCard.svelte"
     }
 
     .content-body {
+        p {
+            margin-top: $margin-large;
+            text-align: center;
+        }
+
         .project-overview {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
