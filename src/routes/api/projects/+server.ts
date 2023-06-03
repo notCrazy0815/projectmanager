@@ -1,3 +1,4 @@
+/*
 const projects: Project[] = [
     {
         name: "Infoprojekt",
@@ -117,9 +118,18 @@ const projects: Project[] = [
         ],
     }
 ];
+*/
+
+// import db from '$lib/prisma'
 
 export async function GET() {
-    return new Response(JSON.stringify(projects), {
+    // const projects = await db.project.findMany({
+    //     include: {
+    //         tasks: true,
+    //     },
+    // })
+
+    return new Response(JSON.stringify([]), {
         headers: {
             'content-type': 'application/json;charset=UTF-8',
         },

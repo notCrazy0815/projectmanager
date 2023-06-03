@@ -4,7 +4,7 @@
 
 <script lang="ts">
 	import AddTaskButton from "../../../components/AddTaskButton.svelte";
-import ProjectOverview from "../../../components/ProjectOverview.svelte";
+    import ProjectOverview from "../../../components/ProjectOverview.svelte";
     import TaskCard from "../../../components/TaskCard.svelte"
     import { onMount } from "svelte"
 

@@ -8,13 +8,22 @@ declare global {
 		// interface Platform {}
 	}
 
+	declare class User {
+		id: string;
+		name: string;
+		email: string;
+		projects: Project[];
+	}
+
 	declare class Project {
+		id: string;
 		name: string;
 		description: string;
 		tasks: Task[];
 	}
 
 	declare class Task {
+		id: string;
 		name: string;
 		status: string;
 	}
