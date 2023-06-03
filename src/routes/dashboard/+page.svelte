@@ -4,7 +4,7 @@
 
 <script lang="ts">
 	import NewButton from "../../components/NewButton.svelte";
-import ProjectCard from "../../components/ProjectCard.svelte"
+    import ProjectCard from "../../components/ProjectCard.svelte"
     import { onMount } from "svelte"
 
     let projects: Project[] = []

@@ -3,7 +3,7 @@
         <a href="/">
             <h3>ProjectManager</h3></a>
         <div class="links">
-            <a href="/dashboard" class="small-text">Dashboard</a>
+            <!-- <a href="/dashboard" class="small-text">Dashboard</a> -->
         </div>
     </nav>
     <div class="content">
@@ -68,6 +68,12 @@
         font-size: $font-size-tiny;
         line-height: 1;
         color: $font-tertiary;
+    }
+
+    :global(.error-text) {
+        font-size: $font-size-small;
+        line-height: 1;
+        color: $error;
     }
 
     :global(.button) {

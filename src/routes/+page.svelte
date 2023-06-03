@@ -3,10 +3,21 @@
 </svelte:head>
 
 <script lang="ts">
-    // export let data: { user: User }
+	import type { ActionData } from "./$types";
+
+    export let form: ActionData = {
+        success: false,
+        error: false,
+        message: "",
+    }
+
     let username: string = ""
     let password: string = ""
 </script>
+
+{#if form?.success}
+<p>{form?.user?.name}</p>
+{/if}
 
 <div class="start-page-wrapper">
     <div class="start-page-content">
@@ -16,11 +27,36 @@
             </h1>
         </div>
         <div class="start-page-links">
-            <form>
+            <form 
+                method="POST"
+                action="?/login"
+            >
                 <h2>Login</h2>
-                <input type="text" bind:value={username} placeholder="Username" />
-                <input type="password" bind:value={password} placeholder="Password" />
+                <input 
+                    type="text"
+                    bind:value={username}
+                    placeholder="Username"
+                    name="username"
+                    required
+                    min="6"
+                    max="25"
+                />
+                <input
+                    type="password"
+                    bind:value={password}
+                    placeholder="Password"
+                    name="password"
+                    min="6"
+                    max="40"
+                    required
+                />
+                {#if form?.error}
+                    <p class="error-text">{form?.message}</p>
+                {/if}
                 <button type="submit" class="button button-primary">Login</button>
+                <p class="tiny-text">
+                    Don't have an account? <a class="tiny-text" href="/register">Register</a>
+                </p>
             </form>
         </div>
     </div>
@@ -78,6 +114,14 @@
                     h2 {
                         text-align: center;
                         margin: 0;
+                    }
+
+                    p {
+                        margin: 0;
+                    }
+
+                    a {
+                        color: $primary;
                     }
 
                     input {
