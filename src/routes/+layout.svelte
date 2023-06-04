@@ -97,6 +97,27 @@
         }
     }
 
+    :global(.button-icon) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        height: $font-size-large;
+        width: $font-size-large;
+        padding: $padding-small;
+
+        background-color: $grey-7;
+
+        &:hover {
+            background-color: darken($grey-7, 10%);
+        }
+
+        :global(img) {
+            width: $font-size-medium * 1.3;
+            height: $font-size-medium * 1.3;
+        }
+    }
+
     :global(.button-error) {
         background-color: $error;
 

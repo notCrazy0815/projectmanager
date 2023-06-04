@@ -1,21 +1,30 @@
 <script lang="ts">
-	import ProjectOverview from "./ProjectOverview.svelte";
+	import ProjectOverview from "./ProjectOverview.svelte"
+    import { createEventDispatcher } from "svelte"
+    const dispath = createEventDispatcher()
 
-    export let project: Project;
+    export let project: Project
 </script>
 
 <div class="project-card">
     <div class="project-overview-container">
-        <ProjectOverview 
+        <ProjectOverview
             done={project.tasks.filter((task) => task.status === "done").length}
             inProgress={project.tasks.filter((task) => task.status === "in_progress").length}
             undone={project.tasks.filter((task) => task.status === "undone").length}
             total={project.tasks.length}
         />
     </div>
-    <div class="project-card-header">
-        <h3>{project.name}</h3>
-        <p>{project.description}</p>
+    <div class="project-card-content">
+        <div class="project-card-header">
+            <h3>{project.name}</h3>
+            <p>{project.description}</p>
+        </div>
+        <div class="project-card-actions">
+            <button class="button button-icon">
+                <img src="img/icons/delete.svg" alt="delete">
+            </button>
+        </div>
     </div>
 </div>
 
@@ -45,20 +54,43 @@
             height: $font-size-medium * 0.25;
         }
 
-        .project-card-header {
+        .project-card-content {
             display: flex;
-            flex-direction: column;
-            gap: $gap-small;
+            justify-content: space-between;
+            align-items: center;
 
-            padding: $padding-large;
-            padding-top: $padding-medium;
+            .project-card-header {
+                display: flex;
+                flex-direction: column;
+                gap: $gap-small;
 
-            h3 {
-                margin: 0;
+                padding: $padding-large;
+                padding-top: $padding-medium;
+
+                h3 {
+                    margin: 0;
+                }
+
+                p {
+                    margin: 0;
+                }
             }
 
-            p {
-                margin: 0;
+            .project-card-actions {
+                padding-right: $padding-large;
+
+                .button {
+                    img {
+                        filter: $font-secondary-filter;
+                        transition: filter $transition-duration ease-in-out;
+                    }
+
+                    &:hover {
+                        img {
+                            filter: $error-filter;
+                        }
+                    }
+                }
             }
         }
     }
