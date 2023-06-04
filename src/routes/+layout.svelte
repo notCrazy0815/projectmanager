@@ -105,6 +105,15 @@
         }
     }
 
+    :global(.input) {
+        padding: $padding-medium;
+        font-size: $font-size-medium;
+        border-radius: $border-radius-small;
+        background-color: $background-secondary;
+        border: 1px solid $background-primary;
+        color: $font-primary;
+    }
+
     :global(.content-wrapper) {
         width: 100%;
         height: 100vh;

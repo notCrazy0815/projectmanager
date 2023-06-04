@@ -1,4 +1,9 @@
-<button class="button button-primary">
+<script lang="ts">
+    import { createEventDispatcher } from "svelte"
+    const dispath = createEventDispatcher()
+</script>
+
+<button class="button button-primary" on:click={() => dispath('trigger')}>
     <img src="/img/icons/edit.svg" alt="edit">
     New
 </button>

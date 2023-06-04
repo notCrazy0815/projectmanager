@@ -30,6 +30,7 @@
                 <h2>Login</h2>
                 <input 
                     type="text"
+                    class="input"
                     bind:value={username}
                     placeholder="Username"
                     name="username"
@@ -39,6 +40,7 @@
                 />
                 <input
                     type="password"
+                    class="input"
                     bind:value={password}
                     placeholder="Password"
                     name="password"
@@ -122,15 +124,6 @@
 
                     a {
                         color: $primary;
-                    }
-
-                    input {
-                        padding: $padding-medium;
-                        font-size: $font-size-medium;
-                        border-radius: $border-radius-small;
-                        background-color: $background-secondary;
-                        border: 1px solid $background-primary;
-                        color: $font-primary;
                     }
 
                     @media screen and (max-width: $breakpoint-desktop) {

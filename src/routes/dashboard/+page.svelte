@@ -3,16 +3,45 @@
 </svelte:head>
 
 <script lang="ts">
-	import NewButton from "../../components/NewButton.svelte";
+	import Modal from "../../components/Modal.svelte"
+    import NewButton from "../../components/NewButton.svelte"
     import ProjectCard from "../../components/ProjectCard.svelte"
 
     let projects: Project[] = []
+    let showCreateProjectModal: boolean = false
+
+    const toggleModal = () => {
+        showCreateProjectModal = !showCreateProjectModal
+    }
 </script>
+
+<Modal showModal={showCreateProjectModal} on:close={toggleModal}>
+    <div slot="header" class="modal-header">
+        <h2>Create a new project</h2>
+    </div>
+    <div slot="body" class="modal-body">
+        <form>
+            <input 
+                type="text"
+                class="input"
+                placeholder="Project name"
+                required
+            />
+            <input 
+                type="text"
+                class="input"
+                placeholder="Project description"
+                required
+            />
+            <button type="submit" class="button button-primary">Create</button>
+        </form>
+    </div>
+</Modal>
 
 <div class="content-header">
     <h2>Dashboard</h2>
     <div class="content-actions">
-        <NewButton />
+        <NewButton on:trigger={() => toggleModal()} />
     </div>
 </div>
 <div class="content-body">
@@ -31,6 +60,25 @@
 
 <style lang="scss">
     @import 'src/assets/scss/variables';
+
+    .modal-header {
+        h2 {
+            text-align: center;
+            margin-bottom: 0;
+            margin-top: $margin-medium
+        }
+    }
+
+    .modal-body {
+        width: 100%;
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: $gap-medium;
+        }
+    }
 
     .content-header {
         display: flex;
