@@ -14,12 +14,36 @@ export const actions = {
 
         if (userId) {
             try {
+                const projects = await db.project.findMany({
+                    where: {
+                        userId
+                    },
+                    select: {
+                        id: true
+                    }
+                })
+
+                for (const project of projects) {
+                    await db.task.deleteMany({
+                        where: {
+                            projectId: project.id
+                        }
+                    })
+                }
+
+                await db.project.deleteMany({
+                    where: {
+                        userId
+                    }
+                })
+
                 await db.user.delete({
                     where: {
                         id: userId
                     }
                 })
             } catch (e) {
+                console.error(e)
                 throw redirect(303, "/")
             }
         }
