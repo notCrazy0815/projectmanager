@@ -1,7 +1,8 @@
 <script lang="ts">
+	import { createEventDispatcher } from "svelte"
 	import ProjectOverview from "./ProjectOverview.svelte"
-    import { createEventDispatcher } from "svelte"
-    const dispath = createEventDispatcher()
+
+    const dispatch = createEventDispatcher()
 
     export let project: Project
 </script>
@@ -16,12 +17,19 @@
         />
     </div>
     <div class="project-card-content">
-        <div class="project-card-header">
-            <h3>{project.name}</h3>
-            <p>{project.description}</p>
-        </div>
+        <a href="dashboard/{project.id}">
+            <div
+                class="project-card-header"
+            >
+                <h3>{project.name}</h3>
+                <p>{project.description}</p>
+            </div>
+        </a>
         <div class="project-card-actions">
-            <button class="button button-icon">
+            <button
+                class="button button-icon"
+                on:click={() => dispatch("delete", { id: project.id })}
+            >
                 <img src="img/icons/delete.svg" alt="delete">
             </button>
         </div>
@@ -59,7 +67,13 @@
             justify-content: space-between;
             align-items: center;
 
+            a {
+                width: 100%;
+            }
+
             .project-card-header {
+                min-width: 100%;
+
                 display: flex;
                 flex-direction: column;
                 gap: $gap-small;
@@ -81,7 +95,7 @@
 
                 .button {
                     img {
-                        filter: $font-secondary-filter;
+                        filter: $font-tertiary-filter;
                         transition: filter $transition-duration ease-in-out;
                     }
 

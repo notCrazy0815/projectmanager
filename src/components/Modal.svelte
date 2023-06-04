@@ -3,7 +3,7 @@
 
     export let showModal: boolean
     let dialog: HTMLDialogElement
-    const dispath = createEventDispatcher()
+    const dispatch = createEventDispatcher()
 
     $: showModal, toggleModal()
 
@@ -14,7 +14,7 @@
     }
 
     const closeModal = () => {
-        dispath("close")
+        dispatch("close")
         dialog.close()
     }
 </script>

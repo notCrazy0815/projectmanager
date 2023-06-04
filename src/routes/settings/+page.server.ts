@@ -43,7 +43,6 @@ export const actions = {
                     }
                 })
             } catch (e) {
-                console.error(e)
                 throw redirect(303, "/")
             }
         }

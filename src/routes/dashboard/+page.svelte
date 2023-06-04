@@ -3,10 +3,10 @@
 </svelte:head>
 
 <script lang="ts">
-	import Modal from "../../components/Modal.svelte"
+    import Modal from "../../components/Modal.svelte"
     import NewButton from "../../components/NewButton.svelte"
     import ProjectCard from "../../components/ProjectCard.svelte"
-    import type { PageData } from "./$types";
+    import type { PageData } from "./$types"
 
     export let data: PageData
 
@@ -14,6 +14,24 @@
 
     const toggleModal = () => {
         showCreateProjectModal = !showCreateProjectModal
+    }
+
+    const deleteProject = async (id: string) => {
+        const res = await fetch(`api/delete/project`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                userId: data.userId,
+                id
+            })
+        })
+
+        if (res.status === 200) {
+            const newProjects = data.projects.filter(project => project.id !== id)
+            data.projects = newProjects
+        }
     }
 </script>
 
@@ -57,9 +75,7 @@
     {:else}
     <div class="project-overview">
         {#each data.projects as project}
-            <a href="dashboard/{project.id}">
-                <ProjectCard {project} />
-            </a>
+            <ProjectCard {project} on:delete={(event) => deleteProject(event.detail.id)} />
         {/each}
     </div>
     {/if}

@@ -4,7 +4,7 @@
 
 <nav class="navbar">
     <a href="/">
-        <h3>ProjectManager</h3>
+        <p class="small-text">ProjectManager</p>
     </a>
     <div class="links">
         <!-- <a href="/dashboard" class="small-text">Dashboard</a> -->
@@ -24,6 +24,11 @@
         justify-content: space-between;
         width: $max-content-width-percentage;
         max-width: $max-content-width;
+
+        p {
+            margin: $margin-large;
+            margin-left: 0;
+        }
 
         .links {
             display: flex;

@@ -102,11 +102,12 @@
         align-items: center;
         justify-content: center;
 
-        height: $font-size-large;
         width: $font-size-large;
+        height: $font-size-large;
         padding: $padding-small;
 
-        background-color: $grey-7;
+        background-color: transparent;
+        box-shadow: none;
 
         &:hover {
             background-color: darken($grey-7, 10%);
