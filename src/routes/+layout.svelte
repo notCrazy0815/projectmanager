@@ -1,11 +1,8 @@
+<script>
+	import NavBar from "../components/NavBar.svelte";
+</script>
 <div class="content-wrapper">
-    <nav class="navbar">
-        <a href="/">
-            <h3>ProjectManager</h3></a>
-        <div class="links">
-            <!-- <a href="/dashboard" class="small-text">Dashboard</a> -->
-        </div>
-    </nav>
+    <NavBar />
     <div class="content">
         <slot></slot>
     </div>
@@ -100,6 +97,14 @@
         }
     }
 
+    :global(.button-error) {
+        background-color: $error;
+
+        &:hover {
+            background-color: darken($error, 10%);
+        }
+    }
+
     :global(.content-wrapper) {
         width: 100%;
         height: 100vh;
@@ -107,19 +112,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-
-        :global(.navbar) {
-            display: flex;
-            justify-content: space-between;
-
-            width: $max-content-width-percentage;
-            max-width: $max-content-width;
-
-            :global(.links) {
-            display: flex;
-            align-items: center;
-            }
-        }
 
         :global(.content) {
             width: $max-content-width-percentage;

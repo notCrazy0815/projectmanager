@@ -44,7 +44,9 @@ $font-family: 'Geologica', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
 
 $font-primary: $grey-1;
 $font-secondary: $grey-2;
+$font-secondary-filter: invert(94%) sepia(3%) saturate(660%) hue-rotate(184deg) brightness(102%) contrast(84%);
 $font-tertiary: $grey-5;
+$font-tertiary-filter: invert(77%) sepia(8%) saturate(507%) hue-rotate(172deg) brightness(90%) contrast(88%);
 $font-primary-dark: black;
 $font-secondary-dark: $grey-9;
 $font-tertiary-dark: $grey-8;

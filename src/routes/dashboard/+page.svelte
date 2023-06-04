@@ -5,14 +5,8 @@
 <script lang="ts">
 	import NewButton from "../../components/NewButton.svelte";
     import ProjectCard from "../../components/ProjectCard.svelte"
-    import { onMount } from "svelte"
 
     let projects: Project[] = []
-
-    onMount(async () => {
-        const res = await fetch("/api/projects")
-        projects = await res.json()
-    });
 </script>
 
 <div class="content-header">

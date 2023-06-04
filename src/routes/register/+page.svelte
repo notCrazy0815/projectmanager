@@ -91,6 +91,10 @@
                 border: 1px solid $background-primary;
                 color: $font-primary;
             }
+
+            @media screen and (max-width: $breakpoint-desktop) {
+                width: 80vw;
+            }
         }
     }
 </style>

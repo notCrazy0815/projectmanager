@@ -15,10 +15,6 @@
     let password: string = ""
 </script>
 
-{#if form?.success}
-<p>{form?.user?.name}</p>
-{/if}
-
 <div class="start-page-wrapper">
     <div class="start-page-content">
         <div class="start-page-title">
@@ -91,6 +87,10 @@
                         -webkit-background-clip: text;
                         -webkit-text-fill-color: transparent;
                     }
+
+                    @media screen and (max-width: $breakpoint-desktop) {
+                        text-align: center;
+                    }
                 }
             }
 
@@ -131,6 +131,10 @@
                         background-color: $background-secondary;
                         border: 1px solid $background-primary;
                         color: $font-primary;
+                    }
+
+                    @media screen and (max-width: $breakpoint-desktop) {
+                        width: 80vw;
                     }
                 }
             }
