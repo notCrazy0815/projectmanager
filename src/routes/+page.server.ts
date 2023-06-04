@@ -1,11 +1,11 @@
-import { comparePasswords, createToken, userAlreadyLoggedIn } from "$lib/auth"
+import { comparePasswords, createToken, userLoggedIn } from "$lib/auth"
 import db from "$lib/prisma"
 import { redirect } from "@sveltejs/kit";
 import type { Actions } from "./$types"
 import { setUserCookies } from "$lib/cookies";
 
 export const load = async({ cookies }) => {
-    if (await userAlreadyLoggedIn(cookies)) throw redirect(303, "/dashboard")
+    if (await userLoggedIn(cookies)) throw redirect(303, "/dashboard")
 }
 
 export const actions = {

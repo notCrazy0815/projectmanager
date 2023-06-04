@@ -1,6 +1,4 @@
 <script lang="ts">
-    import { onMount } from "svelte"
-
     export let done: number
     export let inProgress: number
     export let undone: number

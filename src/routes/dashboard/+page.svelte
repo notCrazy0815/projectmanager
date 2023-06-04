@@ -6,8 +6,10 @@
 	import Modal from "../../components/Modal.svelte"
     import NewButton from "../../components/NewButton.svelte"
     import ProjectCard from "../../components/ProjectCard.svelte"
+    import type { PageData } from "./$types";
 
-    let projects: Project[] = []
+    export let data: PageData
+
     let showCreateProjectModal: boolean = false
 
     const toggleModal = () => {
@@ -20,17 +22,22 @@
         <h2>Create a new project</h2>
     </div>
     <div slot="body" class="modal-body">
-        <form>
+        <form
+            method="POST"
+            action="?/createproject"
+        >
             <input 
                 type="text"
                 class="input"
                 placeholder="Project name"
+                name="projectname"
                 required
             />
             <input 
                 type="text"
                 class="input"
                 placeholder="Project description"
+                name="projectdescription"
                 required
             />
             <button type="submit" class="button button-primary">Create</button>
@@ -45,12 +52,12 @@
     </div>
 </div>
 <div class="content-body">
-    {#if projects.length === 0}
+    {#if data.projects.length === 0}
         <p>No projects yet. Create one by clicking the button above.</p>
     {:else}
     <div class="project-overview">
-        {#each projects as project}
-            <a href="dashboard/{project.name}">
+        {#each data.projects as project}
+            <a href="dashboard/{project.id}">
                 <ProjectCard {project} />
             </a>
         {/each}

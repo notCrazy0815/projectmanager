@@ -1,11 +1,11 @@
-import { createToken, hashPassword, userAlreadyLoggedIn } from '$lib/auth.js'
+import { createToken, hashPassword, userLoggedIn } from '$lib/auth.js'
 import { setUserCookies } from '$lib/cookies'
 import db from '$lib/prisma.js'
 import { validate } from '$lib/userDataValidation.js'
 import { redirect, type Actions } from '@sveltejs/kit'
 
 export const load = async({ cookies }) => {
-    if (await userAlreadyLoggedIn(cookies)) {
+    if (await userLoggedIn(cookies)) {
         throw redirect(303, "/dashboard")
     }
 }

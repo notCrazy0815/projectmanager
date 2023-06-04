@@ -32,7 +32,7 @@ export const verifyToken = (token: string) => {
     }
 }
 
-export const userAlreadyLoggedIn = async (cookies: Cookies) => {
+export const userLoggedIn = async (cookies: Cookies) => {
     const { token, userId } = getUserCookies(cookies)
 
     if (token) {
