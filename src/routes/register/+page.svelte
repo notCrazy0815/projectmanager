@@ -15,6 +15,8 @@
     }
 </script>
 
+<div class="bg"></div>
+
 <div class="register-content">
     <form 
         method="POST"

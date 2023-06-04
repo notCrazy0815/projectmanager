@@ -6,9 +6,9 @@
     <div class="content">
         <slot></slot>
     </div>
-    <footer class="footer">
+    <!-- <footer class="footer">
         <p class="tiny-text">© 2023 <a class="tiny-text" href="https://github.com/notCrazy0815">notCrazy0815</a></p>
-    </footer>
+    </footer> -->
 </div>
 
 <style lang="scss" global>
@@ -131,19 +131,35 @@
             padding-right: $padding-large;
         }
 
-        :global(.footer) {
-            width: $max-content-width-percentage;
-            max-width: $max-content-width;
+        // :global(.footer) {
+        //     width: $max-content-width-percentage;
+        //     max-width: $max-content-width;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: $gap-large;
+        //     display: flex;
+        //     justify-content: center;
+        //     align-items: center;
+        //     gap: $gap-large;
 
-            padding: $padding-medium;
+        //     padding: $padding-medium;
 
-            margin-top: $margin-large;
-        }
+        //     margin-top: $margin-large;
+        // }
+    }
+
+    :global(.bg) {
+        width: 100vw;
+        height: 100%;
+
+        position: absolute;
+        left: 0;
+        bottom: 0;
+
+        z-index: -1;
+
+        background-image: url('img/bg/wave.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
     }
 
     @media screen and (max-width: $breakpoint-large) {

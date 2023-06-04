@@ -24,9 +24,26 @@ export const setUserCookies = (cookies: Cookies, token: string, username: string
 }
 
 export const deleteUserCookies = (cookies: Cookies) => {
-    cookies.delete("token")
-    cookies.delete("username")
-    cookies.delete("userId")
+    cookies.set("token", "", {
+        httpOnly: true,
+        path: "/",
+        maxAge: 0,
+        secure: false,
+    })
+
+    cookies.set("username", "", {
+        httpOnly: false,
+        path: "/",
+        maxAge: 0,
+        secure: false,
+    })
+
+    cookies.set("userId", "", {
+        httpOnly: false,
+        path: "/",
+        maxAge: 0,
+        secure: false,
+    })
 }
 
 export const getUserCookies = (cookies: Cookies) => {

@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import type { Cookies } from '@sveltejs/kit'
 import { getUserCookies } from './cookies'
+import db from './prisma'
 
 export const comparePasswords = (password: string, hash: string) => {
     return bcrypt.compare(password, hash)
@@ -32,11 +33,21 @@ export const verifyToken = (token: string) => {
 }
 
 export const userAlreadyLoggedIn = async (cookies: Cookies) => {
-    const { token } = getUserCookies(cookies)
+    const { token, userId } = getUserCookies(cookies)
 
     if (token) {
-        if (verifyToken(token)) {
-            return true
+        const user = verifyToken(token)
+
+        if (user) {
+            const dbUser = await db.user.findUnique({
+                where: {
+                    id: userId
+                }
+            })
+
+            if (dbUser) {
+                return true
+            }
         }
     }
 

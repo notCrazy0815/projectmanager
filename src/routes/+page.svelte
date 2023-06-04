@@ -15,6 +15,8 @@
     let password: string = ""
 </script>
 
+<div class="bg"></div>
+
 <div class="start-page-wrapper">
     <div class="start-page-content">
         <div class="start-page-title">
