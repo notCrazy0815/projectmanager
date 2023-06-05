@@ -16,8 +16,8 @@ export const actions = {
         const username = data.get("username") as string
         const password = data.get("password") as string
 
-        const { success } = validate(username, password)
-        if (!success) return validate(username, password)
+        const validation = validate(username, password)
+        if (!validation.success) return validation
 
         try {
             const user = await db.user.create({

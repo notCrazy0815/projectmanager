@@ -41,6 +41,13 @@
 		updateTasks();
 	});
 
+	const updateTasks = () => {
+		doneTasks = calcTasks('done');
+		inProgressTasks = calcTasks('in_progress');
+		undoneTasks = calcTasks('undone');
+		totalTasks = getTotalTasks();
+	};
+
 	const deleteTask = async (id: string) => {
 		const res = await fetch('/api/delete/task', {
 			method: 'POST',
@@ -64,11 +71,30 @@
 		}
 	};
 
-	const updateTasks = () => {
-		doneTasks = calcTasks('done');
-		inProgressTasks = calcTasks('in_progress');
-		undoneTasks = calcTasks('undone');
-		totalTasks = getTotalTasks();
+	const updateTaskStatus = async (task: Task) => {
+		if (task.status == "done") task.status = "undone";
+		else if (task.status == "undone") task.status = "in_progress";
+		else if (task.status == "in_progress") task.status = "done";
+
+		const res = await fetch('/api/task', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				userId: data.userId,
+				projectId: data.project?.id,
+				task
+			})
+		});
+
+		if (res.status === 200) {
+			const { success, task } = await res.json();
+			if (success) {
+				updateTasks();
+				updateTaskArray();
+			}
+		}
 	};
 </script>
 
@@ -81,8 +107,16 @@
 		<h2>Add task</h2>
 	</div>
 	<div slot="body" class="modal-body">
-		<form method="POST" action="?/addtask">
+		<form method="POST" action="?/addtask" id="addtask">
 			<input type="text" class="input" placeholder="Task name" name="taskname" required />
+			<div class="status-select-container">
+				<p>Status</p>
+				<select class="status-select" form="addtask" name="status">
+					<option value="undone">Undone</option>
+					<option value="in_progress">In progress</option>
+					<option value="done">Done</option>
+				</select>
+			</div>
 			<button type="submit" class="button button-primary">Create</button>
 		</form>
 	</div>
@@ -110,7 +144,11 @@
 		<p class="no-task-text">No tasks yet. Create one by clicking the button above.</p>
 	{:else}
 		{#each tasks as task}
-			<TaskCard {task} on:delete={(event) => deleteTask(event.detail.id)} />
+			<TaskCard
+				{task}
+				on:delete={(event) => deleteTask(event.detail.id)} 
+				on:status={(event) => updateTaskStatus(event.detail)}
+			/>
 		{/each}
 	{/if}
 </div>
@@ -134,6 +172,33 @@
 			display: flex;
 			flex-direction: column;
 			gap: $gap-medium;
+
+			.status-select-container {
+				display: flex;
+				gap: $gap-medium;
+				align-items: center;
+				padding-top: $padding-small;
+				padding-bottom: $padding-small;
+
+				p {
+					margin: 0;
+				}
+
+				select {
+					width: 100%;
+
+					padding: $padding-small;
+
+					border: none;
+					border-radius: $border-radius-small;
+
+					color: $font-primary;
+					background-color: $background-secondary;
+					font-size: $font-size-medium;
+
+					cursor: pointer;
+				}
+			}
 		}
 	}
 

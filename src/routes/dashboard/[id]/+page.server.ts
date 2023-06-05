@@ -51,11 +51,9 @@ export const actions = {
 
 		const data = await request.formData();
 		const name = data.get('taskname') as string;
+		const status = data.get('status') as string;
 
 		try {
-			const statuses = ['done', 'in_progress', 'undone'];
-			const status = statuses[Math.floor(Math.random() * statuses.length)];
-
 			await db.task.create({
 				data: {
 					name: name,

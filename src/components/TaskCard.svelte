@@ -14,7 +14,7 @@
 		<button class="button button-icon" on:click={() => dispatch('delete', task)}>
 			<img src="/img/icons/delete.svg" alt="Delete" class="delete-icon" />
 		</button>
-		<div class="task-card-status {task.status}" title={task.status} />
+		<button class="task-card-status {task.status}" title={task.status} on:click={() => dispatch('status', task)} />
 	</div>
 </div>
 
@@ -56,6 +56,8 @@
 
 				border-radius: $border-radius-large;
 				cursor: pointer;
+
+				border: none;
 			}
 
 			.task-card-status.done {
