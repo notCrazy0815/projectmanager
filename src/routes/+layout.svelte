@@ -179,7 +179,7 @@
 
 		z-index: -1;
 
-		background-image: url('img/bg/wave.svg');
+		background-image: url('/static/img/bg/wave.svg');
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center;
