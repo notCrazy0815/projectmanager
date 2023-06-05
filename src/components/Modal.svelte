@@ -51,7 +51,12 @@
 
         animation: popUp $transition-duration forwards;
 
+        @media screen and (max-width: $breakpoint-desktop) {
+            width: 80vw;
+        }
+
         .dialog-content {
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
