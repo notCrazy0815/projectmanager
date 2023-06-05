@@ -49,6 +49,13 @@
 	};
 
 	const deleteTask = async (id: string) => {
+		if (data.project) {
+			const newTasks = data.project.tasks.filter((task) => task.id !== id);
+			data.project.tasks = newTasks;
+			updateTaskArray();
+			updateTasks();
+		}
+
 		const res = await fetch('/api/delete/task', {
 			method: 'POST',
 			headers: {
@@ -60,21 +67,15 @@
 				id
 			})
 		});
-
-		if (res.status === 200) {
-			if (data.project) {
-				const newTasks = data.project.tasks.filter((task) => task.id !== id);
-				data.project.tasks = newTasks;
-				updateTaskArray();
-				updateTasks();
-			}
-		}
 	};
 
 	const updateTaskStatus = async (task: Task) => {
 		if (task.status == "done") task.status = "undone";
 		else if (task.status == "undone") task.status = "in_progress";
 		else if (task.status == "in_progress") task.status = "done";
+
+		updateTasks();
+		updateTaskArray();
 
 		const res = await fetch('/api/task', {
 			method: 'POST',
@@ -87,14 +88,6 @@
 				task
 			})
 		});
-
-		if (res.status === 200) {
-			const { success } = await res.json();
-			if (success) {
-				updateTasks();
-				updateTaskArray();
-			}
-		}
 	};
 </script>
 

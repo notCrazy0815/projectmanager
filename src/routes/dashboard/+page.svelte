@@ -17,6 +17,9 @@
     }
 
     const deleteProject = async (id: string) => {
+        const newProjects = data.projects.filter(project => project.id !== id)
+        data.projects = newProjects
+
         const res = await fetch(`api/delete/project`, {
             method: "POST",
             headers: {
@@ -27,11 +30,6 @@
                 id
             })
         })
-
-        if (res.status === 200) {
-            const newProjects = data.projects.filter(project => project.id !== id)
-            data.projects = newProjects
-        }
     }
 </script>
 
