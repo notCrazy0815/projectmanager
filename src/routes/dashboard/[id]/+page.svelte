@@ -89,7 +89,7 @@
 		});
 
 		if (res.status === 200) {
-			const { success, task } = await res.json();
+			const { success } = await res.json();
 			if (success) {
 				updateTasks();
 				updateTaskArray();
