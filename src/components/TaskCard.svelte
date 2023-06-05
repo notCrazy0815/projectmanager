@@ -1,43 +1,74 @@
 <script lang="ts">
-    export let task: Task;
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
+
+	export let task: Task;
 </script>
 
 <div class="task-card">
-    <p class="task-card-title">{task.name}</p>
-    <div class="task-card-status {task.status}" title="{task.status}"></div>
+	<p class="task-card-title">{task.name}</p>
+	<div class="task-card-actions">
+		<button class="button button-icon">
+			<img src="/img/icons/edit.svg" alt="Edit" />
+		</button>
+		<button class="button button-icon" on:click={() => dispatch('delete', task)}>
+			<img src="/img/icons/delete.svg" alt="Delete" class="delete-icon" />
+		</button>
+		<div class="task-card-status {task.status}" title={task.status} />
+	</div>
 </div>
 
 <style lang="scss">
-    @import "src/assets/scss/variables";
-    .task-card {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+	@import 'src/assets/scss/variables';
+	.task-card {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 
-        padding: $padding-medium;
+		padding: $padding-medium;
 
-        background-color: $background-primary;
-        border-radius: $border-radius-medium;
-        box-shadow: $box-shadow-medium;
+		background-color: $background-primary;
+		border-radius: $border-radius-medium;
+		box-shadow: $box-shadow-medium;
 
-        .task-card-status {
-            width: $font-size-medium;
-            height: $font-size-medium;
+		.task-card-actions {
+			display: flex;
+			align-items: center;
 
-            border-radius: $border-radius-large;
-            cursor: pointer;
-        }
+			.button {
+				img {
+					filter: $font-tertiary-filter;
+					transition: filter $transition-duration ease-in-out;
+				}
 
-        .task-card-status.done {
-            background-color: $success;
-        }
+				&:hover {
+					.delete-icon {
+						filter: $error-filter;
+					}
+				}
+			}
 
-        .task-card-status.in_progress {
-            background-color: $warning;
-        }
+			.task-card-status {
+				width: $font-size-medium;
+				height: $font-size-medium;
 
-        .task-card-status.undone {
-            background-color: $error;
-        }
-    }
+				margin-left: $margin-medium * 0.8;
+
+				border-radius: $border-radius-large;
+				cursor: pointer;
+			}
+
+			.task-card-status.done {
+				background-color: $success;
+			}
+
+			.task-card-status.in_progress {
+				background-color: $warning;
+			}
+
+			.task-card-status.undone {
+				background-color: $error;
+			}
+		}
+	}
 </style>

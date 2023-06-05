@@ -1,75 +1,80 @@
-import { userLoggedIn } from '$lib/auth.js'
-import { redirect } from '@sveltejs/kit'
-import db from '$lib/prisma.js'
-import { getUserCookies } from '$lib/cookies.js'
+import { userLoggedIn } from '$lib/auth.js';
+import { redirect } from '@sveltejs/kit';
+import db from '$lib/prisma.js';
+import { getUserCookies } from '$lib/cookies.js';
 
 export const load = async ({ cookies, params }) => {
-    if (!await userLoggedIn(cookies)) {
-        throw redirect(303, "/")
-    }
+	if (!(await userLoggedIn(cookies))) {
+		throw redirect(303, '/');
+	}
 
-    const projectId = params.id
-    const { userId } = getUserCookies(cookies)
+	const projectId = params.id;
+	const { userId } = getUserCookies(cookies);
 
-    const project = await db.project.findUnique({
-        where: {
-            id: projectId
-        },
-        include: {
-            tasks: true
-        }
-    })
+	const project = await db.project.findUnique({
+		where: {
+			id: projectId
+		},
+		include: {
+			tasks: true
+		}
+	});
 
-    if (project?.userId !== userId) {
-        throw redirect(303, "/")
-    }
+	if (project?.userId !== userId) {
+		throw redirect(303, '/');
+	}
 
-    return {
-        project
-    }
-}
+	return {
+		project,
+		userId
+	};
+};
 
 export const actions = {
-    addtask: async ({ params, cookies, request }) => {
-        if (!await userLoggedIn(cookies)) {
-            throw redirect(303, "/")
-        }
+	addtask: async ({ params, cookies, request }) => {
+		if (!(await userLoggedIn(cookies))) {
+			throw redirect(303, '/');
+		}
 
-        const projectId = params.id
-        const { userId } = getUserCookies(cookies)
+		const projectId = params.id;
+		const { userId } = getUserCookies(cookies);
 
-        const project = await db.project.findUnique({
-            where: {
-                id: projectId,
-            }
-        })
+		const project = await db.project.findUnique({
+			where: {
+				id: projectId
+			}
+		});
 
-        if (project?.userId !== userId) {
-            throw redirect(303, "/")
-        }
+		if (project?.userId !== userId) {
+			throw redirect(303, '/');
+		}
 
-        const data = await request.formData()
-        const name = data.get("taskname") as string
+		const data = await request.formData();
+		const name = data.get('taskname') as string;
 
-        try {
-            await db.task.create({
-                data: {
-                    name: name,
-                    projectId: projectId
-                }
-            })
+		try {
+			const statuses = ['done', 'in_progress', 'undone'];
+			const status = statuses[Math.floor(Math.random() * statuses.length)];
 
-            return {
-                success: true,
-                error: false,
-                message: "Task created successfully"
-            }
-        } catch (e) {
-            return {
-                success: false,
-                error: true,
-                message: "Couldnt create task"
-            }
-        }
-    }
-}
+			await db.task.create({
+				data: {
+					name: name,
+					projectId: projectId,
+					status: status
+				}
+			});
+
+			return {
+				success: true,
+				error: false,
+				message: 'Task created successfully'
+			};
+		} catch (e) {
+			return {
+				success: false,
+				error: true,
+				message: 'Couldnt create task'
+			};
+		}
+	}
+};
