@@ -8,9 +8,6 @@
 <div class="task-card">
 	<p class="task-card-title">{task.name}</p>
 	<div class="task-card-actions">
-		<button class="button button-icon">
-			<img src="/img/icons/edit.svg" alt="Edit" />
-		</button>
 		<button class="button button-icon" on:click={() => dispatch('delete', task)}>
 			<img src="/img/icons/delete.svg" alt="Delete" class="delete-icon" />
 		</button>
